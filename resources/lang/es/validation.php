@@ -150,6 +150,8 @@ return [
         'message' => 'ensaje',
         'name' => 'nombre',
         'email' => 'correo electronico',
+        'title' =>  'título',
+        'description' => 'descripción'
 
 
     ],

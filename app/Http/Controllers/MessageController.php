@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Mail\MessageReceived;
 use Illuminate\Support\Facades\Mail;
 
-class MessagesController extends Controller
+class MessageController extends Controller
 {
     public function store()
     {
@@ -20,7 +20,7 @@ class MessagesController extends Controller
         Mail::to('nelson@test.com')->queue(new MessageReceived($message));
 
 
-        return 'Mensaje enviado';
+        return back()->with('status', 'Recibimos tu mensaje, te responderemos en menos de 24 horas.');
     }
 }
 
