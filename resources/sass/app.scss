@@ -6,3 +6,15 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.active a {
+    color: #d63384;
+    text-decoration: none;
+}
+
+a:link {
+    color: blue;
+    text-decoration: none;
+}
+
+

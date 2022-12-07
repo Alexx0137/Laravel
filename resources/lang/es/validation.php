@@ -151,7 +151,8 @@ return [
         'name' => 'nombre',
         'email' => 'correo electronico',
         'title' =>  'título',
-        'description' => 'descripción'
+        'description' => 'descripción',
+        'login' => 'entrar'
 
 
     ],

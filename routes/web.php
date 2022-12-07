@@ -10,6 +10,6 @@ Route::resource('portafolio', 'App\Http\Controllers\ProjectController')
 Route::view('/contacto', 'contact')->name('contact');
 Route::post('contact', 'App\Http\Controllers\MessageController@store')->name('messages.store');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 
