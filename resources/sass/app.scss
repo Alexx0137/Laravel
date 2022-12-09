@@ -7,14 +7,7 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.active a {
-    color: #d63384;
-    text-decoration: none;
+.h-screen {
+    height: 100vh;
 }
-
-a:link {
-    color: blue;
-    text-decoration: none;
-}
-
 

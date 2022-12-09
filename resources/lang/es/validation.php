@@ -152,7 +152,9 @@ return [
         'email' => 'correo electronico',
         'title' =>  'título',
         'description' => 'descripción',
-        'login' => 'entrar'
+        'login' => 'entrar',
+        'subject' => 'asunto',
+        'content' => 'contenido'
 
 
     ],

@@ -15,7 +15,7 @@ mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');
 
-// mix.browserSync('http://localhost:8000/');
+// mix.browserSync('http://localhost:8000');
 
 if (mix.inProduction())
 {

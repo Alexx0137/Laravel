@@ -37,9 +37,11 @@ class ProjectController extends Controller
 
     public function store(SaveProjectRequest $request)
     {
+        return $request->file('image')->store('images');
+
         Project::create($request->validated());
 //
-        return redirect()->route('projects.index')->with('status', 'El proyecto fue creado con exito');
+        return redirect()->route('projects.index')->with('status', 'El proyecto fue creado con éxito');
     }
 
     public function edit(Project $project)
