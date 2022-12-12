@@ -5,35 +5,45 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="display-4 mb-0">@lang('Projects')</h1>
-
-        @auth()
-            <a class="btn btn-primary"
-               href="{{ route('projects.create') }}"
-            >Crear proyecto</a>
-        @endauth
+            <h1 class="display-4 mb-0">@lang('Projects')</h1>
+            @auth()
+                <a class="btn btn-primary"
+                   href="{{ route('projects.create') }}"
+                >Crear proyecto</a>
+            @endauth
         </div>
-        <p class="lead text-secundary"> Proyectos realizados Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        <ul class="list-group">
+        <p class="lead text-secundary"> Proyectos realizados Lorem ipsum dolor sit amet, consectetur adipisicing
+            elit.</p>
+        <div class="d-flex flex-wrap justify-content-between align-items-start">
             @forelse($projects as $project)
-                <li class="list-group-item border-0 mb-3 shadow-sm">
-                    <a class="text-secondary text-decoration-none d-flex justify-content-between align-items-center"
-                        href="{{ route('projects.show', $project) }}"
-                    >
-                        <span class="font-weight-bold">
-                        {{ $project->title }}
-                        </span>
-                        <span class="text-black-50">
-                        {{ $project->created_at->format('d-m-Y') }}
-                         </span>
-                    </a>
-                </li>
+                <div class="card border-0 shadow-sm mt-4 mx-auto" style="width: 18rem;">
+                    @if($project->image)
+                        <img class="card-img-top" style="height: 150px; object-fit: cover"
+                             src="/storage/{{ $project->image }}"
+                             alt="{{ $project->title }}"
+                        >
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
+                        </h5>
+                        <h6>{{ $project->created_at->format('d-m-Y') }}</h6>
+                        <p class="card-text">{{ $project->description }}</p>
+                        <a href="{{ route('projects.show', $project) }}"
+                           class="btn btn-primary btn-sm"
+                        >Ver más</a>
+                    </div>
+                </div>
             @empty
-                <li class="list-group-item border-0 mb-3 shadow-sm">
-                    No hay proyectos para mostrar
-                </li>
+                <div class="card">
+                    <div class="card-body">
+                        No hay proyectos para mostrar
+                    </div>
+                </div>
             @endforelse
-            {{ $projects->links() }}
-        </ul>
+            <div class="mt-4">
+                {{ $projects->links() }}
+            </div>
+        </div>
     </div>
 @endsection

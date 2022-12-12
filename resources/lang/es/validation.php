@@ -154,8 +154,8 @@ return [
         'description' => 'descripción',
         'login' => 'entrar',
         'subject' => 'asunto',
-        'content' => 'contenido'
-
+        'content' => 'contenido',
+        'image' => 'imagen'
 
     ],
 

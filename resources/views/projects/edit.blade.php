@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Crear proyecto')
+@section('title', 'Editar proyecto')
 
 @section('content')
     <div class="container">
@@ -11,6 +11,7 @@
 
                 <form class="bg-white py-3 px-4 shadow rounded"
                       method="POST"
+                      enctype="multipart/form-data"
                       action="{{ route('projects.update', $project) }}">
                     @method('PATCH')
                     <h1 CLASS="display-4 ">Editar proyecto</h1>
