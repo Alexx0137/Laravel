@@ -5,14 +5,16 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-3">
+            @isset($category)
             <h1 class="display-4 mb-0">@lang('Projects')</h1>
+            @endisset
             @can('create', $newProject)
                 <a class="btn btn-primary"
                    href="{{ route('projects.create') }}"
                 >Crear proyecto</a>
             @endcan
         </div>
-        <p class="lead text-secundary"> Proyectos realizados Lorem ipsum dolor sit amet, consectetur adipisicing
+        <p class="lead text-secondary"> Proyectos realizados Lorem ipsum dolor sit amet, consectetur adipisicing
             elit.</p>
         <div class="d-flex flex-wrap justify-content-between align-items-start">
             @forelse($projects as $project)
@@ -29,9 +31,16 @@
                         </h5>
                         <h6>{{ $project->created_at->format('d-m-Y') }}</h6>
                         <p class="card-text">{{ $project->description }}</p>
-                        <a href="{{ route('projects.show', $project) }}"
-                           class="btn btn-primary btn-sm"
-                        >Ver más</a>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ route('projects.show', $project) }}"
+                               class="btn btn-primary btn-sm"
+                            >Ver más</a>
+                            @if($project->category_id)
+                            <a href="{{ route('categories.show', $projec->category) }}"
+                               class="badge badge-secondary"
+                            >{{ $project->category->name }}</a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @empty

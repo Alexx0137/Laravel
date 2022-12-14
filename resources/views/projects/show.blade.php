@@ -15,6 +15,11 @@
 
                 <div class="bg-white p-5 shadow rounded">
                     <h1>{{ $project->title }}</h1>
+                    @if($project->category_id)
+                        <a href="{{ route('categories.show', $projec->category) }}"
+                           class="badge badge-secondary"
+                        >{{ $project->category->name }}</a>
+                    @endif
                     <p class="text-secondary">{{ $project->description }}</p>
                     <p class="text-black-50">{{ $project->created_at->diffForHumans() }}</p>
                     <div class="d-flex justify-content-between align-items-center">
@@ -30,14 +35,13 @@
                                 @can('delete', $project)
                                     <a class="btn btn-danger" href="#"
                                        onclick="document.getElementById('delete-project').submit()">Eliminar</a>
+
+                                    <form id="delete-project" class="d-none" method="POST"
+                                          action="{{ route('projects.destroy', $project) }}">
+                                        @csrf @method('DELETE')
+                                    </form>
                                 @endcan
                             </div>
-                            @can('delete', $project)
-                                <form id="delete-project" class="d-none" method="POST"
-                                      action="{{ route('projects.destroy', $project) }}">
-                                    @csrf @method('DELETE')
-                                </form>
-                            @endcan
                         @endauth
                     </div>
                 </div>
