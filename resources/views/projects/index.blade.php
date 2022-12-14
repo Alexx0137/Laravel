@@ -6,11 +6,11 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="display-4 mb-0">@lang('Projects')</h1>
-            @auth()
+            @can('create', $newProject)
                 <a class="btn btn-primary"
                    href="{{ route('projects.create') }}"
                 >Crear proyecto</a>
-            @endauth
+            @endcan
         </div>
         <p class="lead text-secundary"> Proyectos realizados Lorem ipsum dolor sit amet, consectetur adipisicing
             elit.</p>

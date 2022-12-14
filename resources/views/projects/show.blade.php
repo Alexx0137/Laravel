@@ -24,15 +24,20 @@
 
                         @auth()
                             <div class="btn-group btn-group-sm">
-                                <a class="btn btn-primary" href="{{ route('projects.edit', $project)}}">Editar</a>
-                                <a class="btn btn-danger" href="#"
-                                   onclick="document.getElementById('delete-project').submit()">Eliminar</a>
+                                @can('update', $project)
+                                    <a class="btn btn-primary" href="{{ route('projects.edit', $project)}}">Editar</a>
+                                @endcan
+                                @can('delete', $project)
+                                    <a class="btn btn-danger" href="#"
+                                       onclick="document.getElementById('delete-project').submit()">Eliminar</a>
+                                @endcan
                             </div>
-                            <form id="delete-project" class="d-none" method="POST"
-                                  action="{{ route('projects.destroy', $project) }}">
-                                @csrf @method('DELETE')
-
-                            </form>
+                            @can('delete', $project)
+                                <form id="delete-project" class="d-none" method="POST"
+                                      action="{{ route('projects.destroy', $project) }}">
+                                    @csrf @method('DELETE')
+                                </form>
+                            @endcan
                         @endauth
                     </div>
                 </div>
