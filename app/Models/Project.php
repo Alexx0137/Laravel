@@ -3,9 +3,10 @@
 namespace App\Models;
 
 
-use App\Category;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static create(array $fields)
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Project extends Model
 {
     use  HasFactory;
+    use SoftDeletes;
 
     protected $guarded = [];
     public function getRouteKeyName()

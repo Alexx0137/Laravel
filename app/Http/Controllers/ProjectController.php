@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Models\Category;
 use App\Events\ProjectSaved;
 use http\Env\Request;
 use App\Models\Project;
@@ -22,6 +22,7 @@ class ProjectController extends Controller
         return view('projects.index', [
             'newProject' => new Project,
             'projects' => Project::with('category')->latest()->paginate(),
+            'deletedProjects' => Project::onlyTrashed()->get()
         ]);
     }
 
@@ -85,18 +86,40 @@ class ProjectController extends Controller
             $project->update(array_filter($request->validated()));
         }
 
-        return redirect()->route('projects.show', $project)->with('status', 'El proyecto fue actualizado con exito');
+        return redirect()->route('projects.show', $project)->with('status', 'El proyecto fue actualizado con éxito');
     }
 
     public function destroy(Project $project)
     {
         $this->authorize('delete', $project);
 
-        Storage::delete($project->image);
-
         $project->delete();
 
-        return redirect()->route('projects.index')->with('El proyecto fue eliminado con exito', 'status');
+        return redirect()->route('projects.index')->with( 'status', 'El proyecto fue eliminado con éxito');
+    }
+
+    public function restore( $projectUrl)
+    {
+        $project = Project::withTrashed()->whereUrl($projectUrl)->firstOrFail();
+
+        $this->authorize('restore', $project);
+
+        $project->restore();
+
+        return redirect()->route('projects.index')->with( 'status', 'El proyecto fue restaurado con éxito');
+    }
+
+    public function forceDelete($projectUrl)
+    {
+        $project = Project::withTrashed()->whereUrl($projectUrl)->firstOrFail();
+
+        $this->authorize('force-delete', $project);
+
+        Storage::delete($project->image);
+
+        $project->forceDelete();
+
+        return redirect()->route('projects.index')->with( 'status', 'El proyecto fue eliminado permanentemente');
     }
 }
 

@@ -7,11 +7,11 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             @isset($category)
                 <div>
-            <h1 class="display-4 mb-0" {{ $category->name }}</h1>
-                <a href="{{ route('projects.index') }}">Regresar al portafolio</a>
+                    <h1 class="display-4 mb-0" {{ $category->name }}</h1>
+                    <a href="{{ route('projects.index') }}">Regresar al portafolio</a>
                 </div>
             @else
-            <h1 class="display-4 mb-0">@lang('Projects')</h1>
+                <h1 class="display-4 mb-0">@lang('Projects')</h1>
             @endisset
             @can('create', $newProject)
                 <a class="btn btn-primary"
@@ -41,9 +41,9 @@
                                class="btn btn-primary btn-sm"
                             >Ver más..</a>
                             @if($project->category_id)
-                            <a href="{{ route('categories.show', $project->category) }}"
-                               class="badge badge-secondary text-bg-dark"
-                            >{{ $project->category->name }}</a>
+                                <a href="{{ route('categories.show', $project->category) }}"
+                                   class="badge badge-secondary text-bg-dark"
+                                >{{ $project->category->name }}</a>
                             @endif
                         </div>
                     </div>
@@ -58,6 +58,36 @@
             <div class="mt-4">
                 {{ $projects->links() }}
             </div>
+
         </div>
+        @auth
+            <div class="mt-2">
+                <h4>Papelera</h4>
+                <ul class="list-group">
+                    @foreach($deletedProjects as $deletedProject)
+                        <li class="list-group-item">
+                            {{ $deletedProject->title }}
+                            @can('restore', $deletedProject)
+                                <form method="POST"
+                                      action="{{ route('projects.restore', $deletedProject) }}"
+                                      class="d-inline">
+                                    @csrf @method('PATCH')
+                                    <button class="btn btn-sm btn-info">Restaurar</button>
+                                </form>
+                            @endcan
+                            @can('force-delete', $deletedProject)
+                                <form method="POST"
+                                      onsubmit="return confirm('Esta acción no se puede deshacer, ¡Estás seguro de eliminar este proyecto?')"
+                                      action="{{ route('projects.force-delete', $deletedProject) }}"
+                                      class="d-inline">
+                                    @csrf @method('DELETE')
+                                    <button class="btn btn-sm btn-danger">Eliminar permanentemente</button>
+                                </form>
+                            @endcan
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endauth
     </div>
 @endsection
