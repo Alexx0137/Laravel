@@ -69,7 +69,7 @@ class ProjectController extends Controller
 
     public function update(Project $project, SaveProjectRequest $request)
     {
-        $this->authorize('updtade', $project);
+        $this->authorize('update', $project);
 
         if ($request->hasFile('image')) {
             Storage::delete($project->image);
@@ -90,7 +90,7 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        $this->authorize('delete    ', $project);
+        $this->authorize('delete', $project);
 
         Storage::delete($project->image);
 

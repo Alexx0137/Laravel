@@ -8,7 +8,7 @@ Route::resource('portafolio', 'App\Http\Controllers\ProjectController')
     ->names('projects')
     ->parameters(['portafolio' => 'project']);
 
-Route::get('categorias/{category}', 'App\Http\Controllers\CategoryController@show')->name('categories.show');
+Route::get('categories/{category}', 'App\Http\Controllers\CategoryController@show')->name('categories.show');
 
 Route::view('/contacto', 'contact')->name('contact');
 Route::post('contact', 'App\Http\Controllers\MessageController@store')->name('messages.store');

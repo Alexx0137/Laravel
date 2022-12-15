@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,8 +19,12 @@ class Project extends Model
     {
         return 'url';
     }
-
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
+
 
 
 

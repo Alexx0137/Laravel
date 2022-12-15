@@ -9,10 +9,10 @@ class Category extends Model
 {
     use HasFactory;
 
-    //public function getRouteKeyName()
-    //{
-    //    return 'url';
-    //}
+    public function getRouteKeyName()
+    {
+        return 'url';
+    }
 
     public function projects()
     {
