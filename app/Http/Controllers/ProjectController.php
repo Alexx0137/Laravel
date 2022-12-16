@@ -7,6 +7,8 @@ use App\Events\ProjectSaved;
 use http\Env\Request;
 use App\Models\Project;
 use Illuminate\Auth\Access\Gate;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SaveProjectRequest;
 
@@ -35,7 +37,7 @@ class ProjectController extends Controller
 
     public function create()
     {
-        $this->authorize('create', $project = new Project());
+        $this->authorize('create', $project = new Project);
 
         return view('projects.create', [
             'project' => $project,

@@ -7,13 +7,13 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             @isset($category)
                 <div>
-                    <h1 class="display-4 mb-0" {{ $category->name }}</h1>
+                    <h1 class="display-4 mb-0">{{ $category->name }}</h1>
                     <a href="{{ route('projects.index') }}">Regresar al portafolio</a>
                 </div>
             @else
                 <h1 class="display-4 mb-0">@lang('Projects')</h1>
             @endisset
-            @can('create', $newProject)
+            @can('create', new \App\Models\Project)
                 <a class="btn btn-primary"
                    href="{{ route('projects.create') }}"
                 >Crear proyecto</a>
@@ -60,7 +60,7 @@
             </div>
 
         </div>
-        @auth
+        @can('view_deleted_projects')
             <div class="mt-2">
                 <h4>Papelera</h4>
                 <ul class="list-group">
@@ -88,6 +88,6 @@
                     @endforeach
                 </ul>
             </div>
-        @endauth
+        @endcan
     </div>
 @endsection
